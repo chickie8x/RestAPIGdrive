@@ -17,8 +17,10 @@ class LinkExtract(models.Model):
         return self.fileName
 
     def save(self, *args,**kwargs):
-        self.fileId = getlinks.getFileId(self.url,drive)[0]
-        self.fileName=drive.files().get(fileId=self.fileId,fields='name').execute()['name']
-        self.directUrl=getlinks.getFileId(self.url,drive)[2]
+        obj = getlinks.getFile(self.url,drive)
+        print(obj)
+        self.fileId = obj['id']
+        self.fileName=obj['name']
+        self.directUrl='https://drive.google.com/uc?id=' + obj["id"] + '&export=download'
         return super(LinkExtract, self).save(*args, **kwargs)
 

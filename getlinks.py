@@ -4,6 +4,7 @@ import io
 import pickle
 import os.path
 import re
+from idlelib.iomenu import errors
 
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -14,7 +15,7 @@ from googleapiclient.http import MediaIoBaseDownload
 
 SCOPES = ['https://www.googleapis.com/auth/drive']
 DES_PATH = os.getcwd() + "/"
-
+folderId ='1Aj4-D82_EqtJFz92Z3ynZcHkXG2wBm9h'
 
 def get_Gdrive_folder_id(drive, driveService, name, parent="root"):  # return ID of folder, create it if missing
     body = {'title': name,
@@ -61,20 +62,13 @@ def extract_files_id(links, drive):
         print(links)
 
 
-def copy_file(drive, fileId, parentFolder="root"):  # if different parentFolder, input the folder ID
-    fileOriginMetaData = drive.auth.service.files().get(fileId=fileId).execute()
-    """remove 4 last characters of the original file name 
-    and add file extension(should be .rar) in case the file extension is missing from the name """
-    nameNoExtension = ".".join(fileOriginMetaData['originalFilename'].split(".")[:-1])
-    newFileName = nameNoExtension + "." + fileOriginMetaData['fileExtension']
-    print("Name of the file on your google drive and on the disk: " + newFileName)
-    folderID = get_Gdrive_folder_id(drive, drive.auth.service, "Temp folder for script", parentFolder)
-    copiedFileMetaData = {"parents": [{"id": str(folderID)}], 'title': newFileName}  # ID of destination folder
-    copiedFile = drive.auth.service.files().copy(
-        fileId=fileId,
-        body=copiedFileMetaData
-    ).execute()
-    return copiedFile
+# def copy_file(drive, fileId, copy_title):
+#     copied_file = {'title': copy_title}
+#     try:
+#         return drive.files().copy(fileId=fileId, body=copied_file).execute()
+#     except :
+#         print('An error occurred')
+#     return None
 
 
 def delete_file(drive, id):
@@ -101,10 +95,33 @@ def getCreds():
             pickle.dump(creds, token)
     return creds
 
-def getFileId(link,drive):
-    id = link[33:]
-    name =drive.files().get(fileId=id,fields='name').execute()
-    return (id,name,'https://drive.google.com/uc?id='+id+'&export=download')
+def getFile(link,drive):
+    if not 'view' in link:
+        id = link[33:]
+        metaData = {'parents' : [{ 'id' : folderId } ]}
+        file = drive.files().copy(fileId=id ,fields ='*').execute()
+        drive.files().update(
+            fileId=file['id'],
+            addParents=folderId,
+            removeParents=file['parents'][0],
+            fields='id,parents'
+        ).execute()
+        return file
+    else:
+        id = re.search("file/d/(.*)/views?",link).group(1)
+        metaData = {'parents': [{'id': folderId}]}
+        file = drive.files().copy(fileId=id, fields='*').execute()
+        drive.files().update(
+            fileId=file['id'],
+            addParents=folderId,
+            removeParents=file['parents'][0],
+            fields='id,parents'
+        ).execute()
+        return file
+
+def fileInfo(drive,fileId):
+    file = drive.files().get(fileId=fileId)
+    return file.__dict__
 
 def main():
     """Shows basic usage of the Drive v3 API.

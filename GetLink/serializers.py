@@ -7,4 +7,3 @@ class GetLinkSerializers(serializers.HyperlinkedModelSerializer):
         model = LinkExtract
         fields =['fileName','fileId','url','directUrl']
 
-
