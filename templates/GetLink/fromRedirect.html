@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <p>Thank you for sharing your google drive link :)</p>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <p>file name : {{ result.fileName }}</p>
+    <p>file extension : {{ result.fileExtension }}</p>
+    <p><a href="{{ result.directUrl }}">DOWNLOAD</a> </p>
+    <p>{{ result.fileId }}</p>
+    <p>{{ result.fileSize }}</p>
+
+{% endblock %}

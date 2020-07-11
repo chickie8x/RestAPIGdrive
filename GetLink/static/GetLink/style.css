@@ -1,0 +1,29 @@
+div.container{
+    width: 70%;
+    align-content: center;
+    margin: auto;
+}
+
+
+div.navbar{
+    background-color: #bbbbbb;
+    display: flex;
+    justify-content: center;
+}
+
+ul.nav{
+    display: flex;
+    list-style-type: none;
+}
+li.row-item{
+    flex-direction: row;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-decoration: none;
+}
+
+a.row-item-link{
+    text-decoration: none;
+    color: #0f0f0f;
+    font-weight: bold;
+}

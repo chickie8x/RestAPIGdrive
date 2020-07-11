@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if files %}
+        <ul>
+            {% for file in files %}
+                <li>
+                    <p>file name : {{ file.fileName }}</p>
+                    <p><a href="{{ file.directUrl }}">DOWNLOAD</a> </p>
+                    <p>{{ file.fileId }}</p>
+                    <p>{{ file.fileSize }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+{% endblock %}

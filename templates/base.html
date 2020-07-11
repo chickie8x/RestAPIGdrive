@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <div class="container-fluid">
+
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'GetLink/style.css' %}">
+
+    <div class="container">
         <div class="navbar">
-            <ul>
-                <li><a href="{% url 'index' %}">HOME</a></li>
+            <ul class="nav">
+                <li class="row-item"><a href="{% url 'index' %}" class="row-item-link">HOME</a></li>
+                <li class="row-item"><a href="{% url 'explorer' %} " class="row-item-link">EXPLORER</a></li>
             </ul>
 
         </div>
@@ -19,5 +18,3 @@
         {% block content %}
         {% endblock %}
     </div>
-</body>
-</html>

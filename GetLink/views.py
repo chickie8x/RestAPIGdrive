@@ -36,16 +36,17 @@ def viewFile(request,fileId):
 
 
 
-def formHandle(request):
-    return render(request,'GetLink/fromRedirect.html',context=None)
+def explorer(request):
+    files = LinkExtract.objects.all()
+    return render(request,'GetLink/explorer.html',{'files':files})
 
 def index(request):
     if request.method == 'POST':
         my_form = InputForm(request.POST)
         if my_form.is_valid():
             data = my_form.cleaned_data.get('user_input')
-
-            return render(request,'GetLink/fromRedirect.html')
+            obj=LinkExtract.objects.create(url=data)
+            return render(request,'GetLink/fromRedirect.html',{'result':obj})
     else:
         my_form = InputForm()
     return render(request,'GetLink/index.html',{'form':my_form})
