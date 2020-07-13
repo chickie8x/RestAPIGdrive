@@ -1,7 +1,9 @@
 div.container{
-    width: 70%;
-    align-content: center;
+    display: flex;
     margin: auto;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
 }
 
 
@@ -26,4 +28,18 @@ a.row-item-link{
     text-decoration: none;
     color: #0f0f0f;
     font-weight: bold;
+}
+
+div.content{
+    display: flex;
+    justify-content: center;
+}
+div.footer{
+    display: flex;
+    background-color: #bbbbbb;
+    justify-content: center;
+}
+div.footer_content{
+    padding: 20px;
+
 }
