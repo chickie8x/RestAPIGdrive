@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import LinkExtract
+from .models import FileObject
 # Register your models here.
 
-admin.site.register(LinkExtract)
+admin.site.register(FileObject)

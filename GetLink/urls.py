@@ -7,4 +7,6 @@ urlpatterns=[
     path('api/v1/listFile/',views.listFile),
     path('api/v1/listFile/<str:fileId>',views.viewFile),
     path('explorer/',views.explorer,name='explorer'),
+    path('<str:fileId>',views.getById,name='getById'),
+    path('register/',views.register,name='register'),
 ]

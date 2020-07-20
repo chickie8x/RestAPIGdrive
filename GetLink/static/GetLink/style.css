@@ -4,6 +4,7 @@ div.container{
     justify-content: space-between;
     flex-direction: column;
     height: 100%;
+
 }
 
 
@@ -22,6 +23,8 @@ li.row-item{
     margin-left: 20px;
     margin-right: 20px;
     text-decoration: none;
+    justify-content: center;
+    text-align: center;
 }
 
 a.row-item-link{
@@ -42,4 +45,35 @@ div.footer{
 div.footer_content{
     padding: 20px;
 
+}
+
+ul.list-item{
+    display: flex;
+    list-style-type: none;
+    background-color: #b9def0;
+    border-radius: 10px;
+    padding: 15px;
+
+}
+p.download{
+    margin: 25px;
+    text-align: center;
+}
+input.share-link{
+    text-align: center;
+}
+
+a.download-btn{
+    background-color: #5cb85c;
+    padding: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #2b542c;
+    border-radius: 5px;
+}
+
+a.download-btn:hover{
+    background-color: #2b542c;
+    color: #5cb85c;
+    transition-duration: 0.5s;
 }
