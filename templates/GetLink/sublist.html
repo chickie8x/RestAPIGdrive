@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class="user-area">
+        <h2>User Infomation</h2>
+        <p>Username : {{ user.username }}</p>
+        <p>Email : {{ user.email }}</p>
+        <a class="btn-primary" id="btn1">Change password</a>
+    </div>
+
+
+
+    <!-- popup password change -->
+    <div id="changepw" class="pop">
+        <!-- Modal content -->
+        <div class="pop-content">
+            <span class="close">&times;</span>
+            <h2>Change your password</h2>
+            <label for="newpw1"> new password</label>
+            <input class="newpw" id="newpw1" type="password"></input>
+            <label for="newpw2"> confirm new password</label>
+            <input class="newpw" id="newpw2" type="password"></input>
+            <input class="savepw" type="submit" value="Save">
+        </div>
+    </div>
+
+    {% if sublist %}
+        <h2 class="h2">Subscribed List</h2>
+        {% csrf_token %}
+        <ul class="list-item">
+            {% csrf_token %}
+            {% for item in sublist %}
+                <li class="row-item" id="li-{{ item.id }}">
+                    <span class="delete-sub-file" id="{{ item.id }}">&times;</span>
+                    <a href="{% url 'getById' item.originalID %}" class="row-item-link">{{ item }}</a>
+                    <p>File size : {{ item.fileSize }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h2 class="h2">empty list</h2>
+    {% endif %}
+{% endblock %}

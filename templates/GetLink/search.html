@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if results %}
+        {% for result in results %}
+            <li class="row-item">
+                <h3> {{ result.fileName }} </h3>
+                <p class="file-size">{{ result.fileSize }}</p>
+                <p class="download"><a class="download-btn" href="{{ result.url }}">DOWNLOAD</a></p>
+                <input class="share-link" type="text" value="127.0.0.1/{{ files.originalID }}" size="45" readonly>
+            </li>
+        {% endfor %}
+    {% else %}
+        <h1>No object found</h1>
+    {% endif %}
+{% endblock %}

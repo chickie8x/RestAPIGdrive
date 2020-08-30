@@ -1,17 +1,14 @@
 from __future__ import print_function
 
-import io
-import pickle
 import os.path
+import pickle
 import re
-from idlelib.iomenu import errors
 
-from googleapiclient.discovery import build
-from google_auth_oauthlib.flow import InstalledAppFlow
+from django.core.validators import URLValidator
 from google.auth.transport.requests import Request
+from google_auth_oauthlib.flow import InstalledAppFlow
 
 # If modifying these scopes, delete the file token.pickle.
-from googleapiclient.http import MediaIoBaseDownload
 
 SCOPES = ['https://www.googleapis.com/auth/drive']
 DES_PATH = os.getcwd() + "/"
@@ -67,18 +64,29 @@ def extract_files_id(link):
     #     print(links)
 
 
-def copy_file(drive, fileId, copy_title):
-    copied_file = {'title': copy_title}
-    try:
-        return drive.files().copy(fileId=fileId, body=copied_file).execute()
-    except :
-        print('An error occurred')
-    return None
+# def copy_file(drive, fileId, copy_title):
+#     copied_file = {'title': copy_title}
+#     try:
+#         return drive.files().copy(fileId=fileId, body=copied_file).execute()
+#     except :
+#         print('An error occurred')
+#     return None
 
+
+def fileClone(drive, fileId):
+    file = drive.files().copy(fileId=fileId, fields='*', supportsAllDrives=True).execute()
+    drive.files().update(
+        fileId=file['id'],
+        addParents=folderId,
+        removeParents=file['parents'][0],
+        fields='id,parents',
+    ).execute()
+    return file
 
 
 def delete_file(drive, id):
     drive.auth.service.files().delete(fileId=id).execute()
+
 
 def getCreds():
     creds = None
@@ -126,20 +134,28 @@ def getFile(link,drive):
 
 def fileInfo(drive,fileId):
     file = drive.auth.service.files().get(fileId=fileId,fields ='*',supportsAllDrives=True).execute()
-    print(file)
     return file
 
 
 def sizeof_file(num, suffix='B'):
-    for unit in ['','K','M','G','Ti','Pi','Ei','Zi']:
+    for unit in ['', 'K', 'M', 'G', 'Ti', 'Pi', 'Ei', 'Zi']:
         if abs(num) < 1024.0:
             return "%3.1f%s%s" % (num, unit, suffix)
         num /= 1024.0
     return "%.1f%s%s" % (num, 'Yi', suffix)
 
 
+def checkurl(url):
+    validator = URLValidator()
+    try:
+        validator(url)
+        return True
+    except:
+        return False
+
+
 def main():
-    creds=getCreds()
+    creds = getCreds()
 
 
 if __name__ == '__main__':

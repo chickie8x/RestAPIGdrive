@@ -1,26 +1,39 @@
-
 {% load static %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'GetLink/style.css' %}">
+<head>
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon/favicon.ico' %}"/>
+</head>
 
-    <div class="container">
-        <div class="navbar">
-            <ul class="nav">
-                <li class="row-item"><a href="{% url 'index' %}" class="row-item-link">HOME</a></li>
-                <li class="row-item"><a href="{% url 'explorer' %} " class="row-item-link">EXPLORER</a></li>
-                <li class="row-item"><a href="{% url 'register' %} " class="row-item-link">REGISTER</a></li>
-            </ul>
+<div class="container">
+    <div class="navbar">
+        <ul class="nav">
+            <li class="row-item"><a href="{% url 'index' %}" class="row-item-link">HOME</a></li>
+            <li class="row-item"><a href="{% url 'explorer' %} " class="row-item-link">ALL FILES</a></li>
+            {% if user.is_authenticated %}
+                <li class="row-item"><a class="row-item-link" id="user-link"
+                                        href={% url 'sublist' %}>{{ user.username }}</a></li>
+                <li class="row-item"><a class="row-item-link" href="{% url 'logout' %}"> Log out</a></li>
+            {% else %}
+                <li class="row-item"><a class="row-item-link" href="{% url 'login' %}">LOGIN</a></li>
+                <li class="row-item"><a class="row-item-link" href="{% url 'register' %}"> SIGNUP</a></li>
+            {% endif %}
+            </li>
+        </ul>
 
-        </div>
 
-
-
-        <div class="content">
-            {% block content %}
-            {% endblock %}
-        </div>
-
-        <div class="footer">
-            <div class="footer_content"> Power by Django 3.0</div>
-        </div>
     </div>
+
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <div class="footer">
+        <div class="footer_content"> Power by Django 3.0</div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{% static 'GetLink/app.js' %}"></script>

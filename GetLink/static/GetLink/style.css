@@ -1,4 +1,6 @@
-div.container{
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+div.container {
     display: flex;
     margin: auto;
     justify-content: space-between;
@@ -8,18 +10,19 @@ div.container{
 }
 
 
-div.navbar{
-    background-color: #bbbbbb;
+div.navbar {
+    background-color: #b9def0;
     display: flex;
     justify-content: center;
 }
 
-ul.nav{
+ul.nav {
     display: flex;
     list-style-type: none;
+    flex-wrap: wrap;
 }
-li.row-item{
-    flex-direction: row;
+
+li.row-item {
     margin-left: 20px;
     margin-right: 20px;
     text-decoration: none;
@@ -27,43 +30,49 @@ li.row-item{
     text-align: center;
 }
 
-a.row-item-link{
+a.row-item-link {
     text-decoration: none;
     color: #0f0f0f;
     font-weight: bold;
 }
 
-div.content{
+div.content {
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
-div.footer{
+
+div.footer {
     display: flex;
-    background-color: #bbbbbb;
+    background-color: #b9def0;
     justify-content: center;
 }
-div.footer_content{
+
+div.footer_content {
     padding: 20px;
 
 }
 
-ul.list-item{
+ul.list-item {
     display: flex;
+    flex-direction: column;
+    margin: auto;
     list-style-type: none;
-    background-color: #b9def0;
     border-radius: 10px;
     padding: 15px;
-
+    width: 60%;
 }
-p.download{
+
+p.download {
     margin: 25px;
     text-align: center;
 }
-input.share-link{
+
+input.share-link {
     text-align: center;
 }
 
-a.download-btn{
+a.download-btn {
     background-color: #5cb85c;
     padding: 10px;
     text-decoration: none;
@@ -72,8 +81,244 @@ a.download-btn{
     border-radius: 5px;
 }
 
-a.download-btn:hover{
+a.download-btn:hover {
     background-color: #2b542c;
     color: #5cb85c;
     transition-duration: 0.5s;
+}
+
+li.row-item {
+    margin: 1px;
+    background-color: #b9def0;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+a.add-list-btn {
+    background-color: #5cb85c;
+    padding: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #2b542c;
+    border-radius: 5px;
+}
+
+a.add-list-btn:hover {
+    background-color: #2b542c;
+    color: #5cb85c;
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    text-align: center;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: auto; /* Could be more or less, depending on screen size */
+    border-radius: 10px;
+}
+
+/* The Close Button */
+/*.close {*/
+/*    color: #aaa;*/
+/*    font-size: 28px;*/
+/*    font-weight: bold;*/
+/*}*/
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+form.iForm {
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    padding: 5px;
+    margin: auto;
+    flex-wrap: wrap;
+}
+
+
+input.mainform {
+    width: 70%;
+    flex-direction: row;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 20px;
+    border: solid 1px #dfe1e5;
+    outline: none;
+    padding: 10px;
+}
+
+input.mainform:hover {
+    box-shadow: 0 1px 6px 0 #d4d4d4;
+    transition-duration: 0.2s;
+}
+
+.fsSubmitButton {
+    border: solid 1px #dfe1e5;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 30px;
+    outline: none;
+    background-color: #f8f8f8;
+}
+
+.fsSubmitButton:hover {
+    background-color: #d4d4d4;
+    transition-duration: 0.5s;
+}
+
+#logoText {
+    display: flex;
+    margin: auto;
+    padding-bottom: 20px;
+    list-style: none;
+    font-family: 'Open Sans', Serif;
+    font-weight: bolder;
+    font-size: 70px;
+    flex-wrap: wrap;
+}
+
+form.registerform {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    justify-content: center;
+    margin: auto;
+}
+
+span.helptext {
+    padding: 10px;
+}
+
+li.red {
+    color: #e4452d;
+}
+
+li.blue {
+    color: #4887f8;
+}
+
+li.yellow {
+    color: #f8bb00;
+}
+
+li.green {
+    color: #44a84f;
+}
+
+.pop {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    text-align: center;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.pop-content {
+    display: flex;
+    flex-direction: column;
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */
+    border-radius: 10px;
+}
+
+span.close {
+    display: flex;
+    justify-content: flex-end;
+}
+
+input.newpw {
+    margin: 10px;
+}
+
+input.savepw {
+    margin: auto;
+    width: fit-content;
+}
+
+a.btn-primary {
+    display: flex;
+    color: blue;
+    cursor: pointer;
+    background-color: #bbbbbb;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: auto;
+}
+
+a.btn-primary:hover {
+    background-color: #a9a9a9;
+    transition-duration: 0.5s;
+}
+
+span.delete-sub-file {
+    display: flex;
+    justify-content: flex-end;
+}
+
+span.delete-sub-file:hover {
+    cursor: pointer;
+}
+
+div.user-area {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+}
+
+h2.h2 {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    border-top: solid black 1px;
+}
+
+div.btn-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#user-link {
+    background-color: #bbbbbb;
+    padding: 6px;
+    border-radius: 10px;
+    flex-wrap: wrap;
 }

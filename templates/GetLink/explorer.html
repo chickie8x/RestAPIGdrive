@@ -1,13 +1,24 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
+    {% csrf_token %}
     {% if files %}
         <ul class="list-item">
             {% for file in files %}
                 <li class="row-item">
                     <h3> {{ file.fileName }} </h3>
-                    <p>{{ file.fileSize }}</p>
-                    <p class="download"><a class="download-btn" href="{{ file.directUrl }}">DOWNLOAD</a> </p>
+                    <p>File size : {{ file.fileSize }}</p>
+                    <p>Visited : {{ file.counter }}</p>
+                    <div class="btn-area">
+                        <p class="download"><a class="download-btn"
+                                               href="{% url 'getById' file.originalID %}">DOWNLOAD</a>
+                        </p>
+                        <p class="download"><a class="add-list-btn" id="{{ file.id }}"
+                                               {% if not user.is_authenticated %}href="{% url 'login' %}" {% endif %}>ADD
+                            TO LIST</a>
+                    </div>
+
+                    </p>
                 </li>
             {% endfor %}
         </ul>
@@ -16,5 +27,25 @@
         <h1>No item found</h1>
     {% endif %}
 
+
+    <!-- popup loading -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            {#                <span class="close">&times;</span>#}
+            <img id="loadingimg" src="{% static 'GetLink/images/ajax-loader.gif' %}">
+            <p id="notice">Adding file to list...</p>
+
+
+        </div>
+
+    </div>
+
+
+
+
+    <ul id="seconds"></ul>
+    <ul id="right"></ul>
 
 {% endblock %}

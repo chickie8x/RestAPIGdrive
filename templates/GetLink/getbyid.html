@@ -1,17 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% if files %}
-        {% for file in files %}
-            <li class="row-item">
-                <h3> {{ file.fileName }} </h3>
-                <p class="file-size">{{ file.fileSize }}</p>
-                <p class="download"><a class="download-btn" href="{{ file.directUrl }}">DOWNLOAD</a> </p>
-                <input class="share-link" type="text" value="127.0.0.1/{{ file.originalID }}" size="45" readonly>
-            </li>
-        {% endfor %}
-    {% else %}
-        <h1>Can not get file :(</h1>
-    {% endif %}
-
+    <li class="row-item">
+        <h3> {{ fileName }} </h3>
+        <p class="file-size">{{ fileSize }}</p>
+        <p class="download"><a class="download-btn" href="{{ download }}">DOWNLOAD</a></p>
+        <p>views : {{ views }}</p>
+        <input class="share-link" type="text" value="127.0.0.1/{{ originalID }}" size="45" readonly>
+    </li>
 {% endblock %}

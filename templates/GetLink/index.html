@@ -1,12 +1,22 @@
 {% extends 'base.html' %}
-
-
-{% block content%}
-
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
+    {#    <img src="{% static 'GetLink/images/logo-1.png' %}" id="logoText">#}
+    <ul id="logoText">
+        <li class="blue">G</li>
+        <li class="red">d</li>
+        <li class="yellow">r</li>
+        <li class="blue">i</li>
+        <li class="green">v</li>
+        <li class="red">e</li>
+        <li class="blue">H</li>
+        <li class="red">u</li>
+        <li class="yellow">b</li>
+    </ul>
     <form action="" method="post" class="iForm">
         {% csrf_token %}
         {{ form }}
-        <input type="submit" value="Submit">
+        <input class="fsSubmitButton" type="submit" value="Submit">
     </form>
-
 {% endblock %}
