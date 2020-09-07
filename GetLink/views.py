@@ -8,7 +8,6 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-import GoogleAuthManager
 import getlinks
 from .forms import InputForm, SignUpForm, LoginForm
 from .models import FileObject, SubscribeList
@@ -16,7 +15,7 @@ from .serializers import GetLinkSerializers
 
 creds = getlinks.getCreds()
 drive = build('drive', 'v3', credentials=creds)
-driveManager = GoogleAuthManager.create_drive_manager()
+# driveManager = GoogleAuthManager.create_drive_manager()
 
 
 # Create your views here.

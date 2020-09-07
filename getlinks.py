@@ -133,7 +133,7 @@ def getFile(link,drive):
 
 
 def fileInfo(drive,fileId):
-    file = drive.auth.service.files().get(fileId=fileId,fields ='*',supportsAllDrives=True).execute()
+    file = drive.files().get(fileId=fileId, fields='*', supportsAllDrives=True).execute()
     return file
 
 

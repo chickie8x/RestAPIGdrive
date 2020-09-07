@@ -1,13 +1,15 @@
 from django.contrib.auth.models import User
 from django.db import models
+from googleapiclient.discovery import build
 
-import GoogleAuthManager
 import getlinks
 
 # Create your models here.
 creds = getlinks.getCreds()
-# drive = build('drive', 'v3', credentials=creds)
-drive = GoogleAuthManager.create_drive_manager()
+drive = build('drive', 'v3', credentials=creds)
+
+
+# drive = GoogleAuthManager.create_drive_manager()
 
 
 class FileObject(models.Model):
@@ -18,7 +20,7 @@ class FileObject(models.Model):
     fileSize = models.CharField(max_length=100, blank=True, null=True)
     fileExtension = models.CharField(max_length=100, blank=True, null=True)
     createdDate = models.DateTimeField(auto_now=True)
-    counter = models.IntegerField()
+    counter = models.IntegerField(default=1)
 
     def __str__(self):
         return self.fileName
@@ -27,9 +29,9 @@ class FileObject(models.Model):
         self.originalID = getlinks.extract_files_id(self.url)
         obj = getlinks.fileInfo(drive, self.originalID)
         self.fileId = obj['id']
-        self.fileName = obj['title'] + ' link google drive'
+        self.fileName = obj['name'] + ' link google drive'
         # self.directUrl = 'https://drive.google.com/uc?id=' + obj["id"] + '&export=download'
-        self.fileSize = getlinks.sizeof_file(int(obj['fileSize']), suffix='B')
+        self.fileSize = getlinks.sizeof_file(int(obj['size']), suffix='B')
         self.fileExtension = obj['fileExtension']
         return super(FileObject, self).save(*args, **kwargs)
 
