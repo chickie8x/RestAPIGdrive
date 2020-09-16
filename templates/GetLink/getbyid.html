@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <li class="row-item">
-        <h3> {{ fileName }} </h3>
-        <p class="file-size">{{ fileSize }}</p>
-        <p class="download"><a class="download-btn" href="{{ download }}">DOWNLOAD</a></p>
-        <p>views : {{ views }}</p>
-        <input class="share-link" type="text" value="127.0.0.1/{{ originalID }}" size="45" readonly>
-    </li>
+    <ul class="list-item">
+        <li class="row-item">
+            <h3> {{ fileName }} </h3>
+            <p class="file-size">{{ fileSize }}</p>
+            <p class="download"><a class="download-btn" href="{{ download }}">DOWNLOAD</a></p>
+            <p>views : {{ views }}</p>
+            <input class="share-link" type="text" value="127.0.0.1/{{ originalID }}" size="45" readonly>
+        </li>
+    </ul>
+
 {% endblock %}

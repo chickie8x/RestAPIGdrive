@@ -1,5 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
+
+body {
+    background-color: #fafafa;
+}
+
+
 div.container {
     display: flex;
     margin: auto;
@@ -11,7 +17,6 @@ div.container {
 
 
 div.navbar {
-    background-color: #b9def0;
     display: flex;
     justify-content: center;
 }
@@ -23,17 +28,41 @@ ul.nav {
 }
 
 li.row-item {
-    margin-left: 20px;
-    margin-right: 20px;
+    padding: 10px;
+    margin: 10px;
+    text-decoration: none;
+    justify-content: center;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 2px 2px 21px -11px rgba(0, 0, 0, 0.33);
+}
+
+li.row-item-nav {
+    padding: 10px;
+    margin: 10px;
     text-decoration: none;
     justify-content: center;
     text-align: center;
 }
 
+li.row-item-nav:hover {
+    background-color: #b9def0;
+    border-radius: 10px;
+    transition-duration: 0.8s;
+}
+
+li.row-item-nav:active {
+    background-color: #b9def0;
+    border-radius: 10px;
+    transition-duration: 0.8s;
+}
+
 a.row-item-link {
     text-decoration: none;
-    color: #0f0f0f;
+    color: dodgerblue;
     font-weight: bold;
+    word-wrap: break-word;
 }
 
 div.content {
@@ -44,7 +73,6 @@ div.content {
 
 div.footer {
     display: flex;
-    background-color: #b9def0;
     justify-content: center;
 }
 
@@ -87,12 +115,6 @@ a.download-btn:hover {
     transition-duration: 0.5s;
 }
 
-li.row-item {
-    margin: 1px;
-    background-color: #b9def0;
-    padding: 10px;
-    border-radius: 10px;
-}
 
 a.add-list-btn {
     background-color: #5cb85c;
@@ -152,20 +174,20 @@ a.add-list-btn:hover {
 
 form.iForm {
     display: flex;
-    width: 50%;
+    flex-direction: column;
+    width: 60%;
     justify-content: center;
     padding: 5px;
     margin: auto;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 
 input.mainform {
-    width: 70%;
-    flex-direction: row;
+    width: 60%;
     text-align: center;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: auto;
     border-radius: 20px;
     border: solid 1px #dfe1e5;
     outline: none;
@@ -178,17 +200,20 @@ input.mainform:hover {
 }
 
 .fsSubmitButton {
+    width: 20%;
     border: solid 1px #dfe1e5;
     padding-left: 15px;
     padding-right: 15px;
     border-radius: 30px;
     outline: none;
     background-color: #f8f8f8;
+    padding: 10px;
 }
 
 .fsSubmitButton:hover {
     background-color: #d4d4d4;
     transition-duration: 0.5s;
+    cursor: pointer;
 }
 
 #logoText {
@@ -262,13 +287,37 @@ span.close {
     justify-content: flex-end;
 }
 
+label.label {
+    padding: 10px;
+}
+
 input.newpw {
-    margin: 10px;
+    margin: auto;
+    width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+    border: solid #bbbbbb 1px;
 }
 
 input.savepw {
     margin: auto;
     width: fit-content;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+p.message {
+    color: red;
+}
+
+div.login {
+    display: flex;
+    background-color: white;
+    width: 50%;
+    margin: auto;
+    /*border: solid #bbbbbb 1px;*/
+    border-radius: 10px;
+    box-shadow: 2px 2px 21px -11px rgba(0, 0, 0, 0.33);
 }
 
 a.btn-primary {
@@ -316,9 +365,83 @@ div.btn-area {
     justify-content: center;
 }
 
+@media only screen and (max-width: 1000px) {
+    form.iForm {
+        width: 100%;
+        margin: auto;
+    }
+
+    input.mainform {
+        width: 80%;
+    }
+
+    input.fsSubmitButton {
+
+    }
+
+    a.row-item-link {
+        font-size: 4vw;
+    }
+
+    div.btn-area {
+        flex-direction: column;
+    }
+
+    ul.list-item {
+        width: 100%;
+    }
+
+    p#username {
+        font-size: 4vw;
+    }
+
+    p#email {
+        font-size: 4vw;
+    }
+
+    a.btn-primary {
+        font-size: 4vw;
+    }
+
+    div.pop-content {
+        width: 90%;
+    }
+
+    input#newpw1 {
+        height: 50px;
+    }
+
+    input#newpw2 {
+        height: 50px;
+    }
+
+    label.label {
+        font-size: 4vw;
+    }
+}
+
 #user-link {
-    background-color: #bbbbbb;
     padding: 6px;
-    border-radius: 10px;
     flex-wrap: wrap;
+}
+
+h3.item-title {
+    color: dodgerblue;
+    word-wrap: break-word;
+}
+
+input#username {
+    margin: 10px;
+    width: 80%;
+    padding: 10px;
+    border: solid #bbbbbb 1px;
+    border-radius: 5px;
+}
+
+input#password {
+    margin: 10px;
+    width: 80%;
+    padding: 10px;
+    border: solid #bbbbbb 1px;
+    border-radius: 5px;
 }

@@ -8,15 +8,15 @@
 <div class="container">
     <div class="navbar">
         <ul class="nav">
-            <li class="row-item"><a href="{% url 'index' %}" class="row-item-link">HOME</a></li>
-            <li class="row-item"><a href="{% url 'explorer' %} " class="row-item-link">ALL FILES</a></li>
+            <li class="row-item-nav"><a href="{% url 'index' %}" class="row-item-link">Home</a></li>
+            <li class="row-item-nav"><a href="{% url 'explorer' %} " class="row-item-link">All files</a></li>
             {% if user.is_authenticated %}
-                <li class="row-item"><a class="row-item-link" id="user-link"
-                                        href={% url 'sublist' %}>{{ user.username }}</a></li>
-                <li class="row-item"><a class="row-item-link" href="{% url 'logout' %}"> Log out</a></li>
+                <li class="row-item-nav"><a class="row-item-link" id="user-link"
+                                            href={% url 'sublist' %}>{{ user.username }}</a></li>
+                <li class="row-item-nav"><a class="row-item-link" href="{% url 'logout' %}"> Log out</a></li>
             {% else %}
-                <li class="row-item"><a class="row-item-link" href="{% url 'login' %}">LOGIN</a></li>
-                <li class="row-item"><a class="row-item-link" href="{% url 'register' %}"> SIGNUP</a></li>
+                <li class="row-item-nav"><a class="row-item-link" href="{% url 'login' %}">Login</a></li>
+                <li class="row-item-nav"><a class="row-item-link" href="{% url 'register' %}"> SignUp</a></li>
             {% endif %}
             </li>
         </ul>

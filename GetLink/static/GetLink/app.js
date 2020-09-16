@@ -46,7 +46,7 @@ $(document).ready(function () {
         var pw2 = document.getElementById('newpw2');
         if (pw1.value != pw2.value) {
             pw2.style.border = "solid 1px red";
-            alert('passwords does not match , pls check again !')
+            $(".message").text("Password does not match , please try again");
         } else {
             var pw = /^[A-Za-z]\w{7,14}$/;
             if (pw1.value.match(pw)) {
@@ -62,6 +62,8 @@ $(document).ready(function () {
                         window.location.replace('/accounts/login/');
                     }
                 })
+            } else {
+                $(".message").text("Invalid password formation")
             }
         }
     })

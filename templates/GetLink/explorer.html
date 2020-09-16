@@ -6,16 +6,15 @@
         <ul class="list-item">
             {% for file in files %}
                 <li class="row-item">
-                    <h3> {{ file.fileName }} </h3>
+                    <h3 class="item-title"> {{ file.fileName }} </h3>
                     <p>File size : {{ file.fileSize }}</p>
                     <p>Visited : {{ file.counter }}</p>
                     <div class="btn-area">
                         <p class="download"><a class="download-btn"
-                                               href="{% url 'getById' file.originalID %}">DOWNLOAD</a>
+                                               href="{% url 'getById' file.originalID %}">Download</a>
                         </p>
                         <p class="download"><a class="add-list-btn" id="{{ file.id }}"
-                                               {% if not user.is_authenticated %}href="{% url 'login' %}" {% endif %}>ADD
-                            TO LIST</a>
+                                               {% if not user.is_authenticated %}href="{% url 'login' %}" {% endif %}>AddToList</a>
                     </div>
 
                     </p>

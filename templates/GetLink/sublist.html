@@ -3,9 +3,9 @@
 
 {% block content %}
     <div class="user-area">
-        <h2>User Infomation</h2>
-        <p>Username : {{ user.username }}</p>
-        <p>Email : {{ user.email }}</p>
+        <h2 id="user-infomation">User Infomation</h2>
+        <p id="username">Username : {{ user.username }}</p>
+        <p id="email">Email : {{ user.email }}</p>
         <a class="btn-primary" id="btn1">Change password</a>
     </div>
 
@@ -17,10 +17,11 @@
         <div class="pop-content">
             <span class="close">&times;</span>
             <h2>Change your password</h2>
-            <label for="newpw1"> new password</label>
+            <label for="newpw1" class="label"> New password</label>
             <input class="newpw" id="newpw1" type="password"></input>
-            <label for="newpw2"> confirm new password</label>
+            <label for="newpw2" class="label"> Confirm new password</label>
             <input class="newpw" id="newpw2" type="password"></input>
+            <p class="message"></p>
             <input class="savepw" type="submit" value="Save">
         </div>
     </div>
