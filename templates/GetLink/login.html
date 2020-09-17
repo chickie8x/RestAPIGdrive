@@ -2,17 +2,16 @@
 
 
 {% block content %}
-    <div class="content">
         <div class="login">
             <form action="" method="post" class="iForm">
                 {% csrf_token %}
                 {{ form }}
-                <p class="message">{{ mes }}</p>
                 <input class="fsSubmitButton" type="submit" value="Login">
+                <p class="message">{{ mes }}</p>
+                <a class="forgot" href="">Forgot password </a>
             </form>
 
         </div>
-    </div>
 
 
 

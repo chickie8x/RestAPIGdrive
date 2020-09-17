@@ -115,7 +115,6 @@ def loginView(request):
                     login(request, user)
                     return redirect('/')
                 else:
-                    login_form = LoginForm()
                     mes = 'Username or password is incorrect'
                     return render(request, 'GetLink/login.html', {'form': login_form, 'mes': mes})
         else:

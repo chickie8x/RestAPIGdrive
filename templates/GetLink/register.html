@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 
 
-{% block content%}
+{% block content %}
+    <div class="register">
+        <form action="" method="post" class="registerform">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Submit" class="fsSubmitButton">
+        </form>
+    </div>
 
-    <form action="" method="post" class="registerform">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit">
-    </form>
 
 {% endblock %}
