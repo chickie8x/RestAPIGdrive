@@ -14,7 +14,7 @@ class SignUpForm(UserCreationForm):
     email = forms.EmailField(required=True)
     class Meta:
         model = User
-        fields = ('username','email','password1','password2')
+        fields = ('username', 'email', 'password1', 'password2')
 
 
 class LoginForm(forms.Form):
@@ -23,3 +23,5 @@ class LoginForm(forms.Form):
     password = forms.CharField(max_length=20,
                                widget=forms.PasswordInput(attrs={'id': 'password', 'placeholder': 'Password'}),
                                label=False)
+# class PasswordResetForm(forms.Form):
+#     email = forms.EmailField(required=True,max_length=250, widget=forms.TextInput(attrs={'id':'resetpass','placeholder':'Enter your email to get password reset link'}))

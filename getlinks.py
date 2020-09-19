@@ -14,6 +14,11 @@ SCOPES = ['https://www.googleapis.com/auth/drive']
 DES_PATH = os.getcwd() + "/"
 folderId = '1Q3uFy2KDXXDZ0nhIwsE9_o4v6XCil4mk'
 
+
+def mediafireGet(url):
+    pass
+
+
 def get_Gdrive_folder_id(drive, driveService, name, parent="root"):  # return ID of folder, create it if missing
     body = {'title': name,
             'mimeType': "application/vnd.google-apps.folder"

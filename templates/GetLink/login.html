@@ -2,17 +2,15 @@
 
 
 {% block content %}
-        <div class="login">
-            <form action="" method="post" class="iForm">
-                {% csrf_token %}
-                {{ form }}
-                <input class="fsSubmitButton" type="submit" value="Login">
-                <p class="message">{{ mes }}</p>
-                <a class="forgot" href="">Forgot password </a>
-            </form>
+    <div class="login">
+        <form action="" method="post" class="iForm">
+            {% csrf_token %}
+            {{ form }}
+            <input class="fsSubmitButton" type="submit" value="Login">
+            <p class="message">{{ mes }}</p>
+            <a class="forgot" href="{% url 'passwordreset' %}">Forgot password </a>
+        </form>
 
-        </div>
-
-
+    </div>
 
 {% endblock %}

@@ -19,8 +19,8 @@ class FileObject(models.Model):
     url = models.CharField(max_length=500)
     fileSize = models.CharField(max_length=100, blank=True, null=True)
     fileExtension = models.CharField(max_length=100, blank=True, null=True)
-    createdDate = models.DateTimeField(auto_now=True)
-    counter = models.IntegerField(default=1)
+    createdDate = models.CharField(max_length=100)
+    counter = models.IntegerField(default=0)
 
     def __str__(self):
         return self.fileName
@@ -30,9 +30,9 @@ class FileObject(models.Model):
         obj = getlinks.fileInfo(drive, self.originalID)
         self.fileId = obj['id']
         self.fileName = obj['name'] + ' link google drive'
-        # self.directUrl = 'https://drive.google.com/uc?id=' + obj["id"] + '&export=download'
         self.fileSize = getlinks.sizeof_file(int(obj['size']), suffix='B')
         self.fileExtension = obj['fileExtension']
+        self.createdDate = obj['createdTime'].split('T')[0]
         return super(FileObject, self).save(*args, **kwargs)
 
 

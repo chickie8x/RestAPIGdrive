@@ -1,8 +1,15 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.http import JsonResponse
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.messages.context_processors import messages
+from django.core.mail import send_mail, BadHeaderError
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
 from googleapiclient.discovery import build
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -124,7 +131,6 @@ def loginView(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('/')
 
 
 @login_required
@@ -175,3 +181,39 @@ def pwchange(request):
     except:
         mes = 'change password failed'
     return JsonResponse({'mes': mes}, status=200)
+
+
+def passwordReset(request):
+    if request.method == 'POST':
+        email = request.POST.get('get_email')
+        if email != "":
+            users = User.objects.filter(email=email)[0]
+            if users:
+                subject = 'Password reset requested'
+                email_template = 'GetLink/password_reset_email.txt'
+                c = {
+                    'email': users.email,
+                    'site_name': 'Website',
+                    "uid": urlsafe_base64_encode(force_bytes(users.pk)),
+                    "user": users,
+                    'token': default_token_generator.make_token(users),
+                    'protocol': 'http',
+                }
+                mail = render_to_string(email_template, c)
+                print(mail)
+                try:
+                    send_mail(subject, mail, 'admin@123.com', ['chickie8x.qn@gmail.com'], fail_silently=False)
+                except BadHeaderError:
+                    return HttpResponse('Invalid header')
+                messages.success(request,
+                                 'An email with password reset link has been sent to your inbox , please check ')
+                return redirect('/user/password_reset/done/')
+            else:
+                return HttpResponse('no user found with this email')
+    else:
+        # email=PasswordResetForm()
+        return render(request, 'GetLink/password_reset.html')
+
+
+def passwordResetDone(request):
+    return render(request, 'GetLink/password_reset_done.html')

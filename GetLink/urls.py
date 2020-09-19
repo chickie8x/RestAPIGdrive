@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from . import views
 
@@ -15,4 +15,7 @@ urlpatterns = [
     path('sublist/', views.subList, name='sublist'),
     path('changepw/', views.pwchange, name='pwchange'),
     path('deleteFile/', views.deleteFile, name='deleteFile'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('user/password_reset/', views.passwordReset, name='passwordreset'),
+    path('user/password_reset/done/', views.passwordResetDone, name='pw_reset_done'),
 ]
