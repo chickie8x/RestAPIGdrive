@@ -10,7 +10,6 @@ class InputForm(forms.Form):
 
 
 class SignUpForm(UserCreationForm):
-    use_required_attribute = 'signup'
     email = forms.EmailField(required=True)
     class Meta:
         model = User
@@ -18,10 +17,8 @@ class SignUpForm(UserCreationForm):
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(max_length=20,
-                               widget=forms.TextInput(attrs={'id': 'username', 'placeholder': 'Username'}), label=False)
-    password = forms.CharField(max_length=20,
-                               widget=forms.PasswordInput(attrs={'id': 'password', 'placeholder': 'Password'}),
-                               label=False)
+    username = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'placeholder': 'Username'}))
+    password = forms.CharField(max_length=20, widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
 # class PasswordResetForm(forms.Form):
 #     email = forms.EmailField(required=True,max_length=250, widget=forms.TextInput(attrs={'id':'resetpass','placeholder':'Enter your email to get password reset link'}))
+

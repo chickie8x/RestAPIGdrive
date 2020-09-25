@@ -2,12 +2,20 @@
 
 
 {% block content %}
-    <div class="register">
-        <form action="" method="post" class="registerform">
-            {% csrf_token %}
-            {{ form }}
-            <input type="submit" value="Submit" class="fsSubmitButton">
-        </form>
+    <div class="col-sm-9 col-md-7 col-lg-4 mx-auto">
+        <div class="card">
+            <div class="card-header text-center bg-dark text-light">
+                SignUp
+            </div>
+            <div class="card-body">
+                <form action="" method="post"
+                      class="register-form d-flex flex-column justify-content-center align-items-center">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="SignUp" class="btn btn-primary w-100">
+                </form>
+            </div>
+        </div>
     </div>
 
 

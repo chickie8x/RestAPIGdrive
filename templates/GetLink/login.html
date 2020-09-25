@@ -1,16 +1,21 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="login">
-        <form action="" method="post" class="iForm">
-            {% csrf_token %}
-            {{ form }}
-            <input class="fsSubmitButton" type="submit" value="Login">
-            <p class="message">{{ mes }}</p>
-            <a class="forgot" href="{% url 'passwordreset' %}">Forgot password </a>
-        </form>
-
+    <div class="row justify-content-center">
+        <div class="col-sm-9 col-md-7 col-lg-4 mx-auto">
+            <div class="card mt-5">
+                <div class="card-header text-center bg-dark text-light">Login</div>
+                <div class="card-body mt-5">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <input class="login_btn btn btn-primary" type="submit" value="Login">
+                        <a class="forgot text-center ml-5" href="{% url 'forgotpw' %}">Forgot password </a>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-
 {% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="row col-sm-10 col-lg-6 d-flex justify-content-center">
+            <div class="card">
+                <div class="card-header bg-dark text-light text-center ">Reset password</div>
+                <div class="card-body">
+                    <form class=" d-flex flex-row" method="post">
+                        {% csrf_token %}
+                        <input class="form-control" type="email"
+                               placeholder="Enter your email to get password reset link"
+                               name="get_email"
+                               required>
+                        <input class="btn btn-primary ml-3" type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

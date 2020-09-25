@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% block content %}
     <ul id="logoText">
         <li class="blue">G</li>
@@ -13,10 +12,19 @@
         <li class="red">u</li>
         <li class="yellow">b</li>
     </ul>
-    <form action="" method="post" class="indexForm">
-        {% csrf_token %}
-        {{ form }}
-        {#        <input class="fsSubmitButton" type="submit" value="Submit">#}
-    </form>
+    <div class="col-sm-9 col-md-7 col-lg-6 mx-auto">
+
+
+        <form action="" method="post" class="indexForm ">
+            {% csrf_token %}
+            <div class="input-group">
+                <input type="text" class="form-control text-center" name="get_input"
+                       placeholder="Enter links or file name here " required>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Go</button>
+                </div>
+            </div>
+        </form>
+    </div>
 {% endblock %}
 

@@ -7,7 +7,7 @@ urlpatterns = [
     path('api/v1/listFile/', views.listFile),
     path('api/v1/listFile/<str:fileId>', views.viewFile),
     path('explorer/', views.explorer, name='explorer'),
-    path('<str:fileId>', views.getById, name='getById'),
+    path('file/<str:fileId>/', views.getById, name='getById'),
     path('register/', views.register, name='register'),
     path('accounts/login/', views.loginView, name="login"),
     path('logout/', views.logout_view, name='logout'),
@@ -16,6 +16,6 @@ urlpatterns = [
     path('changepw/', views.pwchange, name='pwchange'),
     path('deleteFile/', views.deleteFile, name='deleteFile'),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('user/password_reset/', views.passwordReset, name='passwordreset'),
+    path('user/forgot_password/', views.passwordReset, name='forgotpw'),
     path('user/password_reset/done/', views.passwordResetDone, name='pw_reset_done'),
 ]

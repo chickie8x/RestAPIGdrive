@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <div class="row justify-content-center">
+        <div class="row col-sm-10 col-lg-6 d-flex justify-content-center">
+            <div class="card w-100 mb-4">
+                <div class="card-header bg-dark text-light text-center">
+                    <p>User information</p>
+                </div>
+                <div class="card-body text-center">
+                    <p>Username : {{ request.user }}</p>
+                    <p>Email : {{ request.user.email }}</p>
+                </div>
+            </div>
+            <div class="card w-100">
+                <div class="card-header bg-dark text-light text-center ">Reset password</div>
+                <div class="card-body">
+                    <div class="myalert alert-danger" id="pw-alert"></div>
+                    <p class="text-center text-warning">Password must be 8 to 16 characters and must contain both
+                        characters and numbers</p>
+                    <form class="d-flex flex-column" method="post">
+                        {% csrf_token %}
+                        <input class="form-control m-2" type="password"
+                               placeholder="Current password"
+                               name="old-password"
+                               required id="old-password">
+                        <input class="form-control m-2" type="password"
+                               placeholder="New password"
+                               name="password1"
+                               required id="newpw1">
+                        <input class="form-control m-2" type="password"
+                               placeholder="Confirm new password"
+                               name="password2"
+                               required id="newpw2">
+                        <input class="btn btn-primary m-2" type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

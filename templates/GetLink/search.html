@@ -1,16 +1,77 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
+    {% csrf_token %}
     {% if results %}
-        {% for result in results %}
-            <li class="row-item">
-                <h3> {{ result.fileName }} </h3>
-                <p class="file-size">{{ result.fileSize }}</p>
-                <p class="download"><a class="download-btn" href="{{ result.url }}">DOWNLOAD</a></p>
-                <input class="share-link" type="text" value="127.0.0.1/{{ files.originalID }}" size="45" readonly>
-            </li>
-        {% endfor %}
+        <ul class="list-group list-group-flush">
+            {% for result in results %}
+                <li class="list-group-item d-flex flex-column justify-content-between align-items-center p-3 mb-3 bg-white ">
+                    <p class="itemTitle text-break text-primary"> {{ result.fileName }} </p>
+                    <p>File size : {{ result.fileSize }}</p>
+                    <div class="btn-group">
+                        <form action="{% url 'getById' result.originalID %}">
+                            <input type="submit" class="btn-success border-0 ml-2 mr-2 p-2 rounded-lg" value="Download">
+                        </form>
+
+                        <form>
+                            {% if user.is_authenticated %}
+                                <button type="button"
+                                        class="addtolist btn-primary border-0 ml-2 mr-2 p-2 rounded-lg"
+                                        id="{{ result.id }}"
+                                        data-toggle="modal"
+                                        data-target="#myModal">Add to list
+                                </button>
+                            {% else %}
+                                <a type="button"
+                                   class="addtolist btn btn-primary border-0 ml-2 mr-2 p-2 rounded-lg"
+                                   id="{{ result.id }}"
+                                   role="button"
+                                   href="{% url 'login' %}">Add to list</a>
+                            {% endif %}
+                        </form>
+
+
+                    </div>
+
+                    <span class="badge badge-primary badge-pill mt-2 py-1">Visited : {{ result.counter }}</span>
+
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog modal-sm modal-dialog-centered">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h5 class="modal-title m-auto">Adding file to your list</h5>
+                                    {#                            <button type="button" class="close" data-dismiss="modal">&times;</button>#}
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body modal-dialog-scrollable d-flex justify-content-center"
+                                     id="modalID">
+                                    <div class="spinner-border text-primary mr-4"></div>
+                                    <div>Processing ...</div>
+
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary m-auto" data-dismiss="modal">Close
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
     {% else %}
-        <h1>No object found</h1>
+        <h1>No item found</h1>
     {% endif %}
+
+
+    <ul id="seconds"></ul>
+    <ul id="right"></ul>
+
 {% endblock %}

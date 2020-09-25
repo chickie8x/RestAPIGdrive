@@ -3,21 +3,64 @@
 {% block content %}
     {% csrf_token %}
     {% if files %}
-        <ul class="list-item">
+        <ul class="list-group list-group-flush">
             {% for file in files %}
-                <li class="row-item">
-                    <h3 class="item-title"> {{ file.fileName }} </h3>
+                <li class="list-group-item d-flex flex-column justify-content-between align-items-center p-3 mb-3 bg-white ">
+                    <p class="itemTitle text-break text-primary"> {{ file.fileName }} </p>
                     <p>File size : {{ file.fileSize }}</p>
-                    <p>Visited : {{ file.counter }}</p>
-                    <div class="btn-area">
-                        <p class="download"><a class="download-btn"
-                                               href="{% url 'getById' file.originalID %}">Download</a>
-                        </p>
-                        <p class="download"><a class="add-list-btn" id="{{ file.id }}"
-                                               {% if not user.is_authenticated %}href="{% url 'login' %}" {% endif %}>AddToList</a>
+                    <div class="btn-group">
+                        <form action="{% url 'getById' file.originalID %}">
+                            <input type="submit" class="btn-success border-0 ml-2 mr-2 p-2 rounded-lg" value="Download">
+                        </form>
+
+                        <form>
+                            {% if user.is_authenticated %}
+                                <button type="button"
+                                        class="addtolist btn-primary border-0 ml-2 mr-2 p-2 rounded-lg"
+                                        id="{{ file.id }}"
+                                        data-toggle="modal"
+                                        data-target="#myModal">Add to list
+                                </button>
+                            {% else %}
+                                <a type="button"
+                                   class="addtolist btn btn-primary border-0 ml-2 mr-2 p-2 rounded-lg"
+                                   id="{{ file.id }}"
+                                   role="button"
+                                   href="{% url 'login' %}?next={{ request.path }}">Add to list</a>
+                            {% endif %}
+                        </form>
+
+
                     </div>
 
-                    </p>
+                    <span class="badge badge-primary badge-pill mt-2 py-1">Visited : {{ file.counter }}</span>
+
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog modal-sm modal-dialog-centered">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header justify-content-center align-items-center">
+                                    <h5 class="modal-title">Adding file to your list</h5>
+                                    {#                            <button type="button" class="close" data-dismiss="modal">&times;</button>#}
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body text-center text-break" id="modalID">
+                                    <div class="spinner-border text-primary mr-4"></div>
+                                    <div>Processing ...</div>
+
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary m-auto" data-dismiss="modal">Close
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </li>
             {% endfor %}
         </ul>
@@ -25,23 +68,6 @@
     {% else %}
         <h1>No item found</h1>
     {% endif %}
-
-
-    <!-- popup loading -->
-    <div id="myModal" class="modal">
-
-        <!-- Modal content -->
-        <div class="modal-content">
-            {#                <span class="close">&times;</span>#}
-            <img id="loadingimg" src="{% static 'GetLink/images/ajax-loader.gif' %}">
-            <p id="notice">Adding file to list...</p>
-
-
-        </div>
-
-    </div>
-
-
 
 
     <ul id="seconds"></ul>

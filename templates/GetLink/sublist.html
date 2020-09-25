@@ -2,40 +2,22 @@
 
 
 {% block content %}
-    <div class="user-area">
-        <h2 id="user-infomation">User Infomation</h2>
-        <p id="username">Username : {{ user.username }}</p>
-        <p id="email">Email : {{ user.email }}</p>
-        <a class="btn-primary" id="btn1">Change password</a>
-    </div>
-
-
-
-    <!-- popup password change -->
-    <div id="changepw" class="pop">
-        <!-- Modal content -->
-        <div class="pop-content">
-            <span class="close">&times;</span>
-            <h2>Change your password</h2>
-            <label for="newpw1" class="label"> New password</label>
-            <input class="newpw" id="newpw1" type="password"></input>
-            <label for="newpw2" class="label"> Confirm new password</label>
-            <input class="newpw" id="newpw2" type="password"></input>
-            <p class="message"></p>
-            <input class="savepw" type="submit" value="Save">
-        </div>
-    </div>
-
     {% if sublist %}
-        <h2 class="h2">Subscribed List</h2>
-        {% csrf_token %}
-        <ul class="list-item">
+        <p class="h2 m-auto text-primary pb-4 text-center ">Subscribed List</p>
+        <ul class="list-group ">
             {% csrf_token %}
             {% for item in sublist %}
-                <li class="row-item" id="li-{{ item.id }}">
-                    <span class="delete-sub-file" id="{{ item.id }}">&times;</span>
-                    <a href="{% url 'getById' item.originalID %}" class="row-item-link">{{ item }}</a>
-                    <p>File size : {{ item.fileSize }}</p>
+                <li class="list-group-item d-flex flex-row" id="li-{{ item.id }}">
+                    <div class="col col-11 d-flex flex-column m-auto ">
+                        <div class="col h5 text-break"><a href="{% url 'getById' item.originalID %}"
+                                                          class="item-link text-decoration-none">{{ item }}</a></div>
+                        <div class="file-size col text-muted text-sm-left">File size : {{ item.fileSize }}</div>
+                    </div>
+                    <div class="col col-1 d-flex m-auto border-primary">
+                        <div class="delfile d-flex justify-content-end" itemid="{{ item.id }}"><i
+                                class="fa fa-trash fa-1x"></i></div>
+                    </div>
+
                 </li>
             {% endfor %}
         </ul>

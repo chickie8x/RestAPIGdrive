@@ -158,6 +158,14 @@ def checkurl(url):
     except:
         return False
 
+def validatePassword(pw1, pw2):
+    if len(pw1) < 8 or len(pw1) > 16:
+        return False
+    else:
+        if any(n.isdigit() for n in pw1) == True and any(c.isalpha() for c in pw1) == True and pw1 == pw2:
+            return True
+        else:
+            return False
 
 def main():
     creds = getCreds()
