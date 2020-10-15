@@ -2,6 +2,7 @@ $(document).ready(function () {
 
     // csrf token get
     var csrf = $("input[name=csrfmiddlewaretoken]").val();
+    $('[data-toggle="tooltip"]').tooltip();
 
     // reload div tag
     function updateDiv() {
@@ -14,6 +15,24 @@ $(document).ready(function () {
 
     }
 
+    //generate link download
+
+    $('#btn-gen-link').click(function () {
+        $.ajax({
+            url: '/generate/',
+            type: 'post',
+            data: {
+                parameter: $(this).attr('parameter'),
+                csrfmiddlewaretoken: csrf,
+            },
+            success: function (response) {
+                $('#myModal2').modal("hide");
+                window.location.href = response.link;
+            }
+        })
+    });
+
+
     // fade out message
     $(".alert").delay(4000).fadeOut(500, function () {
         $(this).alert('close');
@@ -21,7 +40,6 @@ $(document).ready(function () {
 
     // add file to list
     $(".addtolist").click(function () {
-        var modalBody = document.getElementById('modalID')
         $.ajax({
             url: '/ajax_post/',
             type: 'post',
@@ -29,8 +47,9 @@ $(document).ready(function () {
                 fileid: $(this).attr('id'),
                 csrfmiddlewaretoken: csrf,
             },
-            success: function (response) {
-                modalBody.innerText = response.mes;
+            success: function () {
+                $('#myModal').modal('hide');
+                updateDiv();
             }
         })
     });

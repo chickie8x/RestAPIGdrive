@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% if urls %}
+        {% for url in urls %}
+            <ul class="list-group">
+                <li class="list-group-item">
+                    {{ url.url }}
+                </li>
+            </ul>
+        {% endfor %}
+    {% else %}
+        No url found
+    {% endif %}
+{% endblock %}

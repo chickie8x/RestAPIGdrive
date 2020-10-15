@@ -1,3 +1,5 @@
+import time
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -26,7 +28,6 @@ creds = getlinks.getCreds()
 drive = build('drive', 'v3', credentials=creds)
 
 
-# driveManager = GoogleAuthManager.create_drive_manager()
 
 
 # Create your views here.
@@ -69,8 +70,10 @@ def index(request):
         if getlinks.checkurl(data):
             originalFileID = getlinks.extract_files_id(data)
             if FileObject.objects.filter(originalID=originalFileID).exists():
+                print('exists')
                 return redirect('/file/' + originalFileID)
             else:
+                print('create')
                 FileObject.objects.create(url=data)
                 return redirect('/file/' + originalFileID)
         else:
@@ -81,20 +84,23 @@ def index(request):
 
 
 def getById(request, fileId):
-    download = getlinks.fileClone(drive, fileId)['webContentLink']
     file = FileObject.objects.filter(originalID=fileId)[0]
-    file.counter += 1
-    file.save()
-
     context = {
         'fileID': file.id,
         'fileName': file.fileName,
         'fileSize': file.fileSize,
-        'download': download,
+        'genId': file.storedFileId,
         'originalID': file.originalID,
         'views': file.counter
     }
     return render(request, 'GetLink/getbyid.html', context=context)
+
+
+def genLink(request):
+    if request.method == 'POST':
+        parameter = request.POST.get('parameter')
+        link = getlinks.fileClone(drive, parameter)['webContentLink']
+        return JsonResponse({'link': link}, status=200)
 
 
 def register(request):
@@ -157,12 +163,16 @@ def ajax_post(request):
     file = FileObject.objects.get(pk=fileid)
     user = User.objects.get(pk=userid)
     title = file.fileName
+    time.sleep(1)
     if not SubscribeList.objects.filter(fileID=fileid, userID=userid).exists():
         obj = SubscribeList.objects.create(userID=user, fileID=file, title=title)
         result = obj.title + ' is added to list'
+        messages.add_message(request, messages.SUCCESS, result)
     else:
         obj = SubscribeList.objects.get(fileID=fileid, userID=userid)
         result = obj.title + ' is already exist'
+        messages.add_message(request, messages.WARNING, result)
+
     return JsonResponse({'mes': result}, status=200)
 
 
@@ -249,3 +259,8 @@ def passwordReset(request):
 
 def passwordResetDone(request):
     return render(request, 'GetLink/password_reset_done.html')
+
+
+def getUrl(request):
+    obj = FileObject.objects.all()
+    return render(request, 'GetLink/getUrl.html', {'urls': obj})

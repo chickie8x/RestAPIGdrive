@@ -18,4 +18,6 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('user/forgot_password/', views.passwordReset, name='forgotpw'),
     path('user/password_reset/done/', views.passwordResetDone, name='pw_reset_done'),
+    path('get/urls', views.getUrl, name='getUrl'),
+    path('generate/', views.genLink, name='genLink'),
 ]
